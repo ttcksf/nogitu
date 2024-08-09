@@ -71,9 +71,10 @@
                                     ?>
                                         <?php echo $youtube;?>
                                     <?php else:?>
-                                        <figure><img src="<?php echo esc_url(get_template_directory_uri() . '/images/news-1.jpg');?>" alt=""></figure>
+                                        <figure><img src="<?php echo esc_url(get_template_directory_uri() . '/images/news-1.jpg');?>" loading="lazy" alt=""></figure>
                                     <?php endif;?>
                                     <?php
+                                        global $post;
                                         $cats = get_the_terms($post->ID,"category");
                                         if($cats):
                                             foreach($cats as $cat):
@@ -103,6 +104,22 @@
                         <p>動画が見つかりませんでした。</p>
                     <?php endif;?>
                 </div>
+                <!-- pagenation -->
+                <div class="pagenation-wrapper">
+                    <?php if (paginate_links()) : ?>
+                        <div class="pagenation">
+                            <?php
+                            echo paginate_links(array(
+                                'end_size' => 1,
+                                'mid_size' => 1,
+                                'prev_next' => true,
+                                'prev_text' => '<i class="fas fa-angle-left"></i>',
+                                'next_text' => '<i class="fas fa-angle-right"></i>',
+                            ));
+                            ?>
+                        </div><!-- /pagenation -->
+                    <?php endif; ?>
+                </div><!-- /.pagenation-wrapper -->
             </section>
 
         </div> <!-- cont end -->
